@@ -171,7 +171,9 @@
 
     /* ── SERVICES ── */
     .services { background: var(--white); }
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.8rem; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem; }
+@media (max-width: 900px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 500px) { .services-grid { grid-template-columns: 1fr; } }
     .service-card { border: 1px solid var(--light-gray); border-radius: 4px; padding: 2.2rem; transition: box-shadow 0.2s; position: relative; overflow: hidden; background: var(--white); }
     .service-card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
     .service-card:hover { box-shadow: 0 8px 32px rgba(13,27,42,0.08); }
