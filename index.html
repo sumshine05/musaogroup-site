@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MUSAO Group – Connecting Canada to the World</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0d1b2a;
+      --dark: #14263a;
+      --gold: #c8973a;
+      --gold-light: #e0b060;
+      --white: #ffffff;
+      --off-white: #f5f3ef;
+      --gray: #6b7280;
+      --light-gray: #e8e4dc;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--navy);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 6vw;
+      background: rgba(13, 27, 42, 0.97);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(200,151,58,0.2);
+    }
+
+    .nav-left { display: flex; align-items: center; gap: 2.5rem; }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--gold); }
+
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; align-items: center; }
+    .nav-links a {
+      color: rgba(255,255,255,0.78);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold-light); }
+
+    .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+
+    .lang-switch {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+    }
+    .lang-switch a {
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+      padding: 0.25rem 0.5rem;
+      border-radius: 2px;
+      transition: color 0.2s;
+    }
+    .lang-switch a:hover { color: var(--gold-light); }
+    .lang-switch a.active { color: var(--gold); border: 1px solid rgba(200,151,58,0.4); }
+    .lang-switch .sep { color: rgba(255,255,255,0.2); }
+
+    .nav-cta {
+      background: var(--gold);
+      color: var(--navy);
+      padding: 0.5rem 1.3rem;
+      border-radius: 3px;
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--gold-light); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--navy) 0%, #1a3a55 60%, #0d1b2a 100%);
+      display: flex;
+      align-items: center;
+      padding: 0 6vw;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 80% 50%, rgba(200,151,58,0.08) 0%, transparent 70%),
+        repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(255,255,255,0.015) 40px, rgba(255,255,255,0.015) 41px);
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: 680px;
+      animation: fadeUp 0.9s ease both;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(200,151,58,0.18);
+      color: var(--gold-light);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.38rem 1rem;
+      border-radius: 2px;
+      border: 1px solid rgba(200,151,58,0.3);
+      margin-bottom: 1.6rem;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.18;
+      margin-bottom: 1.4rem;
+    }
+    .hero h1 em { font-style: italic; color: var(--gold-light); }
+
+    .hero p {
+      color: rgba(255,255,255,0.7);
+      font-size: 1.08rem;
+      font-weight: 300;
+      max-width: 520px;
+      margin-bottom: 2.4rem;
+      line-height: 1.75;
+    }
+
+    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy);
+      padding: 0.85rem 2rem;
+      border: none;
+      border-radius: 3px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    .btn-outline-hero {
+      background: transparent;
+      color: var(--white);
+      padding: 0.85rem 2rem;
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 3px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+      display: inline-block;
+    }
+    .btn-outline-hero:hover { border-color: var(--gold); color: var(--gold-light); }
+
+    .hero-map {
+      position: absolute;
+      right: -2vw; top: 50%;
+      transform: translateY(-50%);
+      width: 46vw; max-width: 620px;
+      opacity: 0.11;
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 6rem 6vw; }
+
+    .section-tag {
+      display: inline-block;
+      color: var(--gold);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.25;
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      color: var(--gray);
+      font-size: 1rem;
+      font-weight: 300;
+      max-width: 540px;
+      line-height: 1.75;
+      margin-bottom: 3rem;
+    }
+
+    /* ── ABOUT ── */
+    .about {
+      background: var(--off-white);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5vw;
+      align-items: center;
+    }
+
+    .about-visual {
+  border-radius: 4px;
+  overflow: hidden;
+  line-height: 0;
+}
+    .about-visual::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 30% 70%, rgba(200,151,58,0.25), transparent 60%);
+    }
+    .about-visual-text { position: relative; text-align: center; color: var(--white); padding: 3rem; }
+    .about-visual-text .big {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem; color: var(--gold); font-weight: 700; display: block; line-height: 1;
+    }
+    .about-visual-text p { font-size: 0.9rem; color: rgba(255,255,255,0.6); margin-top: 0.5rem; letter-spacing: 0.08em; text-transform: uppercase; }
+
+    .about-body p { color: var(--gray); font-size: 0.98rem; line-height: 1.8; margin-bottom: 1.1rem; }
+
+    /* ── SERVICES ── */
+    .services { background: var(--white); }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.8rem; }
+
+    .service-card {
+      border: 1px solid var(--light-gray);
+      border-radius: 4px;
+      padding: 2.2rem;
+      transition: box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+      background: var(--white);
+    }
+    .service-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 3px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .service-card:hover { box-shadow: 0 8px 32px rgba(13,27,42,0.08); }
+    .service-card:hover::after { transform: scaleX(1); }
+
+    .service-icon {
+      width: 48px; height: 48px;
+      background: rgba(200,151,58,0.1);
+      border-radius: 3px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.2rem;
+      font-size: 1.4rem;
+    }
+    .service-card h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 600; color: var(--navy); margin-bottom: 0.7rem; }
+    .service-card p { color: var(--gray); font-size: 0.88rem; line-height: 1.7; }
+
+    /* ── HOW WE WORK ── */
+    .how { background: var(--navy); color: var(--white); }
+    .how .section-title { color: var(--white); }
+    .how .section-sub { color: rgba(255,255,255,0.55); }
+
+    .how-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.4rem; }
+    @media (max-width: 900px) { .how-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 500px) { .how-grid { grid-template-columns: 1fr; } }
+
+    .how-item {
+      padding: 1.8rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 4px;
+      background: rgba(255,255,255,0.03);
+      transition: background 0.2s;
+    }
+    .how-item:hover { background: rgba(200,151,58,0.07); }
+    .how-item .num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem; color: var(--gold); font-weight: 700; line-height: 1; margin-bottom: 0.8rem;
+    }
+    .how-item h4 { font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: 0.5rem; }
+    .how-item p { font-size: 0.87rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
+
+    /* ── VALUES ── */
+    .values { background: var(--off-white); text-align: center; }
+    .values .section-title,
+    .values .section-sub { margin-left: auto; margin-right: auto; }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.4rem;
+      margin: 0 auto;
+    }
+    @media (max-width: 900px) { .values-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 500px) { .values-grid { grid-template-columns: 1fr; } }
+    .value-item {
+      padding: 2rem 1.5rem;
+      background: var(--white);
+      border-radius: 4px;
+      border: 1px solid var(--light-gray);
+    }
+    .value-icon { font-size: 2rem; margin-bottom: 0.9rem; display: block; }
+    .value-item h4 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600; color: var(--navy); margin-bottom: 0.5rem; }
+    .value-item p { font-size: 0.87rem; color: var(--gray); line-height: 1.7; }
+
+    /* ── CONTACT ── */
+    .contact {
+      background: var(--white);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5vw;
+      align-items: start;
+    }
+
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-form input,
+    .contact-form textarea {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem;
+      padding: 0.85rem 1.1rem;
+      border: 1px solid var(--light-gray);
+      border-radius: 3px;
+      background: var(--off-white);
+      color: var(--navy);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus { border-color: var(--gold); }
+    .contact-form textarea { min-height: 150px; resize: vertical; }
+    .contact-form button {
+      background: var(--gold);
+      color: var(--navy);
+      padding: 0.85rem;
+      border: none;
+      border-radius: 3px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      transition: background 0.2s;
+    }
+    .contact-form button:hover { background: var(--gold-light); }
+
+    .contact-info h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--navy); margin-bottom: 0.6rem; }
+    .contact-info .intro { font-size: 0.95rem; color: var(--gray); line-height: 1.75; margin-bottom: 1.8rem; }
+
+    .contact-detail { display: flex; gap: 0.9rem; margin-bottom: 1.1rem; align-items: flex-start; }
+    .contact-detail .icon {
+      width: 38px; height: 38px;
+      background: rgba(200,151,58,0.1);
+      border-radius: 3px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .contact-detail p { font-size: 0.9rem; color: var(--gray); line-height: 1.6; }
+    .contact-detail strong { display: block; color: var(--navy); font-weight: 600; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.55);
+      padding: 3rem 6vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      border-top: 1px solid rgba(200,151,58,0.2);
+    }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--white); font-weight: 700; }
+    .footer-logo span { color: var(--gold); }
+    footer p { font-size: 0.82rem; }
+    .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .footer-links a { color: rgba(255,255,255,0.45); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold-light); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .about, .contact { grid-template-columns: 1fr; }
+      .hero-map { display: none; }
+      .hero { padding-top: 8rem; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-left">
+      <a class="nav-logo" href="#">MUSAO<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#how">Our Approach</a></li>
+        <li><a href="#values">Values</a></li>
+      </ul>
+    </div>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <a href="index.html" class="active">EN</a>
+        <span class="sep">|</span>
+        <a href="fr/index.html">FR</a>
+      </div>
+      <a href="#contact" class="nav-cta">Contact Us</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">Canadian Import–Export</div>
+      <h1>Connecting <em>Canada</em><br>to the World</h1>
+      <p>Global trade is complex. We make it straightforward: helping businesses source products internationally, navigate cross-border logistics, and reach customers in Canada and beyond.</p>
+      <div class="hero-buttons">
+        <a href="#services" class="btn-primary">Our Services</a>
+        <a href="#contact" class="btn-outline-hero">Get In Touch</a>
+      </div>
+    </div>
+
+    <svg class="hero-map" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="white" stroke-width="1.2">
+      <ellipse cx="400" cy="250" rx="380" ry="220" stroke-dasharray="6 4"/>
+      <ellipse cx="400" cy="250" rx="260" ry="220"/>
+      <ellipse cx="400" cy="250" rx="130" ry="220"/>
+      <line x1="20" y1="250" x2="780" y2="250"/>
+      <line x1="400" y1="30" x2="400" y2="470"/>
+      <path d="M130,100 Q200,80 250,130 Q300,150 320,200 Q280,230 240,210 Q190,190 160,160 Z"/>
+      <path d="M350,80 Q430,60 500,90 Q560,120 580,180 Q540,220 490,200 Q440,170 400,150 Z"/>
+      <path d="M560,100 Q640,90 700,130 Q740,160 720,210 Q680,230 650,200 Q610,170 590,140 Z"/>
+      <path d="M100,240 Q180,220 220,270 Q200,330 160,350 Q120,330 110,290 Z"/>
+      <path d="M350,240 Q440,220 480,280 Q500,340 460,380 Q400,400 360,360 Q330,310 340,270 Z"/>
+      <path d="M550,230 Q640,210 680,270 Q700,320 670,360 Q630,380 590,350 Q560,310 560,270 Z"/>
+      <circle cx="290" cy="155" r="4" fill="white"/>
+      <circle cx="480" cy="145" r="4" fill="#c8973a"/>
+      <circle cx="620" cy="165" r="4" fill="white"/>
+      <circle cx="200" cy="290" r="4" fill="white"/>
+      <circle cx="420" cy="305" r="4" fill="white"/>
+      <line x1="290" y1="155" x2="480" y2="145" stroke="#c8973a" stroke-dasharray="4 3"/>
+      <line x1="480" y1="145" x2="620" y2="165" stroke="#c8973a" stroke-dasharray="4 3"/>
+    </svg>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-visual">
+  <img src="images/handshake.jpg" alt="Business handshake" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:4px;" />
+</div>
+    </div>
+    <div class="about-body">
+      <span class="section-tag">About Us</span>
+      <h2 class="section-title">A Canadian Business Built for Global Trade</h2>
+      <p>Founded in 2024, MUSAO Group is a Canadian import-export company focused on making international trade more accessible for businesses of all sizes.</p>
+      <p>We work closely with our clients to understand their specific needs, whether that means finding the right supplier, navigating customs and compliance, or getting products to customers across North America.</p>
+      <p>We are at the beginning of our journey and proud of it. Every client relationship we build is one we intend to keep for the long term, grounded in transparency, clear communication, and genuine commitment.</p>
+      <a href="#contact" class="btn-primary" style="margin-top:0.5rem; display:inline-block;">Work With Us</a>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <span class="section-tag">What We Do</span>
+    <h2 class="section-title">Our Services</h2>
+    <p class="section-sub">We offer a focused set of services designed to simplify cross-border trade, adaptable to your industry and the nature of your products.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🌐</div>
+        <h3>Import &amp; Export</h3>
+        <p>We facilitate cross-border trade between Canada, the United States, and international markets, handling logistics coordination and compliance requirements.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔍</div>
+        <h3>Product Sourcing</h3>
+        <p>We help identify and vet suppliers that match your quality and reliability standards, saving you the time and uncertainty of searching on your own.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📦</div>
+        <h3>Distribution</h3>
+        <p>We help streamline your supply chain to make your products more accessible to customers in Canada and the United States.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🏪</div>
+        <h3>Market Access</h3>
+        <p>We support international companies looking to enter the Canadian or US market with local guidance and distribution connections.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📋</div>
+        <h3>Trade Compliance</h3>
+        <p>We help ensure your transactions meet the relevant customs and regulatory requirements, reducing the risk of delays or complications.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">💼</div>
+        <h3>Business Consulting</h3>
+        <p>For businesses new to international trade, we offer practical guidance to help you understand your options and plan your next steps.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW WE WORK -->
+  <section class="how" id="how">
+    <span class="section-tag" style="color:var(--gold-light)">Our Approach</span>
+    <h2 class="section-title">How We Work</h2>
+    <p class="section-sub">Our approach is straightforward, personal, and built around your specific situation.</p>
+    <div class="how-grid">
+      <div class="how-item">
+        <div class="num">01</div>
+        <h4>Listen First</h4>
+        <p>We take the time to understand your business, your goals, and the specific challenges you're facing before proposing any solutions.</p>
+      </div>
+      <div class="how-item">
+        <div class="num">02</div>
+        <h4>Tailor the Plan</h4>
+        <p>Every engagement is shaped around your needs. There are no one-size-fits-all packages, just practical plans that fit your situation.</p>
+      </div>
+      <div class="how-item">
+        <div class="num">03</div>
+        <h4>Stay Transparent</h4>
+        <p>We keep you informed at every step. No surprises, no hidden complexity: just clear communication throughout the process.</p>
+      </div>
+      <div class="how-item">
+        <div class="num">04</div>
+        <h4>Build for the Long Term</h4>
+        <p>We are not looking for one-off transactions. We aim to be a reliable partner you can count on as your business grows and evolves.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="values" id="values">
+    <span class="section-tag">What We Stand For</span>
+    <h2 class="section-title">Our Values</h2>
+    <p class="section-sub" style="margin:0 auto 3rem;">These are the principles that guide every decision we make and every relationship we build.</p>
+    <div class="values-grid">
+      <div class="value-item">
+        <span class="value-icon">🤝</span>
+        <h4>Integrity</h4>
+        <p>We say what we mean and do what we say. Honest dealings are non-negotiable for us.</p>
+      </div>
+      <div class="value-item">
+        <span class="value-icon">🎯</span>
+        <h4>Clarity</h4>
+        <p>We cut through complexity and communicate in plain terms, so you always know where things stand.</p>
+      </div>
+      <div class="value-item">
+        <span class="value-icon">🌱</span>
+        <h4>Partnership</h4>
+        <p>Your success is our success. We are invested in the outcomes, not just the transaction.</p>
+      </div>
+      <div class="value-item">
+        <span class="value-icon">🔎</span>
+        <h4>Diligence</h4>
+        <p>We do our homework: vetting suppliers, checking compliance, following through on every detail.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div>
+      <span class="section-tag">Contact Us</span>
+      <h2 class="section-title">Let's Talk</h2>
+      <p class="section-sub" style="margin-bottom:2rem;">Have a question or want to explore how we can help? Send us a message and we'll get back to you promptly.</p>
+      <div class="contact-detail">
+        <div class="icon">📍</div>
+        <p><strong>Location</strong>Canada</p>
+      </div>
+      <div class="contact-detail">
+        <div class="icon">🌐</div>
+        <p><strong>Website</strong>musaogroup.com</p>
+      </div>
+      <div class="contact-detail">
+        <div class="icon">✉️</div>
+        <p><strong>Email</strong>info@musaogroup.com</p>
+      </div>
+    </div>
+    <div>
+      <form class="contact-form" onsubmit="return false;">
+        <input type="text" placeholder="Your Name" />
+        <input type="email" placeholder="Your Email" />
+        <textarea placeholder="Tell us a bit about your business and what you're looking for..."></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">MUSAO<span>.</span> Group</div>
+    <p>© 2024 MUSAO Group. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#how">Our Approach</a>
+      <a href="#values">Values</a>
+      <a href="#contact">Contact</a>
+      <a href="fr/index.html">Français</a>
+    </div>
+  </footer>
+
+</body>
+</html>

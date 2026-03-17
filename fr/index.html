@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Groupe MUSAO – Connecter le Canada au Monde</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0d1b2a;
+      --dark: #14263a;
+      --gold: #c8973a;
+      --gold-light: #e0b060;
+      --white: #ffffff;
+      --off-white: #f5f3ef;
+      --gray: #6b7280;
+      --light-gray: #e8e4dc;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--navy);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 6vw;
+      background: rgba(13, 27, 42, 0.97);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(200,151,58,0.2);
+    }
+
+    .nav-left { display: flex; align-items: center; gap: 2.5rem; }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--gold); }
+
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; align-items: center; }
+    .nav-links a {
+      color: rgba(255,255,255,0.78);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold-light); }
+
+    .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+
+    .lang-switch {
+      display: flex; align-items: center; gap: 0.4rem;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em;
+    }
+    .lang-switch a { color: rgba(255,255,255,0.45); text-decoration: none; padding: 0.25rem 0.5rem; border-radius: 2px; transition: color 0.2s; }
+    .lang-switch a:hover { color: var(--gold-light); }
+    .lang-switch a.active { color: var(--gold); border: 1px solid rgba(200,151,58,0.4); }
+    .lang-switch .sep { color: rgba(255,255,255,0.2); }
+
+    .nav-cta {
+      background: var(--gold); color: var(--navy);
+      padding: 0.5rem 1.3rem; border-radius: 3px;
+      font-weight: 600; font-size: 0.82rem;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--gold-light); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--navy) 0%, #1a3a55 60%, #0d1b2a 100%);
+      display: flex; align-items: center;
+      padding: 0 6vw;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 80% 50%, rgba(200,151,58,0.08) 0%, transparent 70%),
+        repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(255,255,255,0.015) 40px, rgba(255,255,255,0.015) 41px);
+    }
+    .hero-content { position: relative; max-width: 680px; animation: fadeUp 0.9s ease both; }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(200,151,58,0.18); color: var(--gold-light);
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 0.38rem 1rem; border-radius: 2px; border: 1px solid rgba(200,151,58,0.3);
+      margin-bottom: 1.6rem;
+    }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 700; color: var(--white); line-height: 1.18; margin-bottom: 1.4rem; }
+    .hero h1 em { font-style: italic; color: var(--gold-light); }
+    .hero p { color: rgba(255,255,255,0.7); font-size: 1.08rem; font-weight: 300; max-width: 520px; margin-bottom: 2.4rem; line-height: 1.75; }
+    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn-primary {
+      background: var(--gold); color: var(--navy);
+      padding: 0.85rem 2rem; border: none; border-radius: 3px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.92rem; font-weight: 600;
+      letter-spacing: 0.04em; cursor: pointer; text-decoration: none;
+      transition: background 0.2s, transform 0.15s; display: inline-block;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    .btn-outline-hero {
+      background: transparent; color: var(--white);
+      padding: 0.85rem 2rem; border: 1px solid rgba(255,255,255,0.35); border-radius: 3px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.92rem; font-weight: 500;
+      cursor: pointer; text-decoration: none; transition: border-color 0.2s, color 0.2s; display: inline-block;
+    }
+    .btn-outline-hero:hover { border-color: var(--gold); color: var(--gold-light); }
+
+    .hero-map { position: absolute; right: -2vw; top: 50%; transform: translateY(-50%); width: 46vw; max-width: 620px; opacity: 0.11; }
+
+    /* ── SECTIONS ── */
+    section { padding: 6rem 6vw; }
+
+    .section-tag { display: inline-block; color: var(--gold); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 0.8rem; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 700; color: var(--navy); line-height: 1.25; margin-bottom: 1rem; }
+    .section-sub { color: var(--gray); font-size: 1rem; font-weight: 300; max-width: 540px; line-height: 1.75; margin-bottom: 3rem; }
+
+    /* ── ABOUT ── */
+    .about { background: var(--off-white); display: grid; grid-template-columns: 1fr 1fr; gap: 5vw; align-items: center; }
+
+    .about-visual {
+  border-radius: 4px;
+  overflow: hidden;
+  line-height: 0;
+}
+    .about-visual::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 70%, rgba(200,151,58,0.25), transparent 60%); }
+    .about-visual-text { position: relative; text-align: center; color: var(--white); padding: 3rem; }
+    .about-visual-text .big { font-family: 'Playfair Display', serif; font-size: 3.5rem; color: var(--gold); font-weight: 700; display: block; line-height: 1; }
+    .about-visual-text p { font-size: 0.9rem; color: rgba(255,255,255,0.6); margin-top: 0.5rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .about-body p { color: var(--gray); font-size: 0.98rem; line-height: 1.8; margin-bottom: 1.1rem; }
+
+    /* ── SERVICES ── */
+    .services { background: var(--white); }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.8rem; }
+    .service-card { border: 1px solid var(--light-gray); border-radius: 4px; padding: 2.2rem; transition: box-shadow 0.2s; position: relative; overflow: hidden; background: var(--white); }
+    .service-card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+    .service-card:hover { box-shadow: 0 8px 32px rgba(13,27,42,0.08); }
+    .service-card:hover::after { transform: scaleX(1); }
+    .service-icon { width: 48px; height: 48px; background: rgba(200,151,58,0.1); border-radius: 3px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; font-size: 1.4rem; }
+    .service-card h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 600; color: var(--navy); margin-bottom: 0.7rem; }
+    .service-card p { color: var(--gray); font-size: 0.88rem; line-height: 1.7; }
+
+    /* ── HOW WE WORK ── */
+    .how { background: var(--navy); color: var(--white); }
+    .how .section-title { color: var(--white); }
+    .how .section-sub { color: rgba(255,255,255,0.55); }
+    .how-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.4rem; }
+    @media (max-width: 900px) { .how-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 500px) { .how-grid { grid-template-columns: 1fr; } }
+    .how-item { padding: 1.8rem; border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; background: rgba(255,255,255,0.03); transition: background 0.2s; }
+    .how-item:hover { background: rgba(200,151,58,0.07); }
+    .how-item .num { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--gold); font-weight: 700; line-height: 1; margin-bottom: 0.8rem; }
+    .how-item h4 { font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: 0.5rem; }
+    .how-item p { font-size: 0.87rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
+
+    /* ── VALUES ── */
+    .values { background: var(--off-white); text-align: center; }
+    .values .section-title, .values .section-sub { margin-left: auto; margin-right: auto; }
+    .values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.4rem; margin: 0 auto; }
+    @media (max-width: 900px) { .values-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 500px) { .values-grid { grid-template-columns: 1fr; } }
+    .value-item { padding: 2rem 1.5rem; background: var(--white); border-radius: 4px; border: 1px solid var(--light-gray); }
+    .value-icon { font-size: 2rem; margin-bottom: 0.9rem; display: block; }
+    .value-item h4 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600; color: var(--navy); margin-bottom: 0.5rem; }
+    .value-item p { font-size: 0.87rem; color: var(--gray); line-height: 1.7; }
+
+    /* ── CONTACT ── */
+    .contact { background: var(--white); display: grid; grid-template-columns: 1fr 1fr; gap: 5vw; align-items: start; }
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-form input, .contact-form textarea {
+      font-family: 'DM Sans', sans-serif; font-size: 0.92rem;
+      padding: 0.85rem 1.1rem; border: 1px solid var(--light-gray);
+      border-radius: 3px; background: var(--off-white); color: var(--navy);
+      outline: none; transition: border-color 0.2s;
+    }
+    .contact-form input:focus, .contact-form textarea:focus { border-color: var(--gold); }
+    .contact-form textarea { min-height: 150px; resize: vertical; }
+    .contact-form button {
+      background: var(--gold); color: var(--navy); padding: 0.85rem;
+      border: none; border-radius: 3px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.92rem; font-weight: 600;
+      cursor: pointer; letter-spacing: 0.04em; transition: background 0.2s;
+    }
+    .contact-form button:hover { background: var(--gold-light); }
+    .contact-info h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--navy); margin-bottom: 0.6rem; }
+    .contact-detail { display: flex; gap: 0.9rem; margin-bottom: 1.1rem; align-items: flex-start; }
+    .contact-detail .icon { width: 38px; height: 38px; background: rgba(200,151,58,0.1); border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .contact-detail p { font-size: 0.9rem; color: var(--gray); line-height: 1.6; }
+    .contact-detail strong { display: block; color: var(--navy); font-weight: 600; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--navy); color: rgba(255,255,255,0.55); padding: 3rem 6vw; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; border-top: 1px solid rgba(200,151,58,0.2); }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--white); font-weight: 700; }
+    .footer-logo span { color: var(--gold); }
+    footer p { font-size: 0.82rem; }
+    .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .footer-links a { color: rgba(255,255,255,0.45); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold-light); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .about, .contact { grid-template-columns: 1fr; }
+      .hero-map { display: none; }
+      .hero { padding-top: 8rem; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-left">
+      <a class="nav-logo" href="#">MUSAO<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="#apropos">À propos</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#approche">Notre approche</a></li>
+        <li><a href="#valeurs">Valeurs</a></li>
+      </ul>
+    </div>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <a href="index.html">EN</a>
+        <span class="sep">|</span>
+        <a href="fr/index.html" class="active">FR</a>
+      </div>
+      <a href="#contact" class="nav-cta">Nous joindre</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">Import–Export Canadien</div>
+      <h1>Connecter le <em>Canada</em><br>au Monde</h1>
+      <p>Le commerce international est complexe. Nous le simplifions en aidant les entreprises à s'approvisionner à l'échelle mondiale, à naviguer la logistique transfrontalière et à rejoindre leurs clients au Canada et au-delà.</p>
+      <div class="hero-buttons">
+        <a href="#services" class="btn-primary">Nos services</a>
+        <a href="#contact" class="btn-outline-hero">Nous contacter</a>
+      </div>
+    </div>
+
+    <svg class="hero-map" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="white" stroke-width="1.2">
+      <ellipse cx="400" cy="250" rx="380" ry="220" stroke-dasharray="6 4"/>
+      <ellipse cx="400" cy="250" rx="260" ry="220"/>
+      <ellipse cx="400" cy="250" rx="130" ry="220"/>
+      <line x1="20" y1="250" x2="780" y2="250"/>
+      <line x1="400" y1="30" x2="400" y2="470"/>
+      <path d="M130,100 Q200,80 250,130 Q300,150 320,200 Q280,230 240,210 Q190,190 160,160 Z"/>
+      <path d="M350,80 Q430,60 500,90 Q560,120 580,180 Q540,220 490,200 Q440,170 400,150 Z"/>
+      <path d="M560,100 Q640,90 700,130 Q740,160 720,210 Q680,230 650,200 Q610,170 590,140 Z"/>
+      <path d="M100,240 Q180,220 220,270 Q200,330 160,350 Q120,330 110,290 Z"/>
+      <path d="M350,240 Q440,220 480,280 Q500,340 460,380 Q400,400 360,360 Q330,310 340,270 Z"/>
+      <path d="M550,230 Q640,210 680,270 Q700,320 670,360 Q630,380 590,350 Q560,310 560,270 Z"/>
+      <circle cx="290" cy="155" r="4" fill="white"/>
+      <circle cx="480" cy="145" r="4" fill="#c8973a"/>
+      <circle cx="620" cy="165" r="4" fill="white"/>
+      <circle cx="200" cy="290" r="4" fill="white"/>
+      <circle cx="420" cy="305" r="4" fill="white"/>
+      <line x1="290" y1="155" x2="480" y2="145" stroke="#c8973a" stroke-dasharray="4 3"/>
+      <line x1="480" y1="145" x2="620" y2="165" stroke="#c8973a" stroke-dasharray="4 3"/>
+    </svg>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="apropos">
+    <div class="about-visual">
+  <img src="../images/handshake.jpg" alt="Business handshake" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:4px;" />
+</div>
+    </div>
+    <div class="about-body">
+      <span class="section-tag">À propos de nous</span>
+      <h2 class="section-title">Une entreprise canadienne taillée pour le commerce mondial</h2>
+      <p>Fondé en 2024, le Groupe MUSAO est une entreprise canadienne d'import-export qui s'est donnée pour mission de rendre le commerce international plus accessible aux entreprises de toutes tailles.</p>
+      <p>Nous travaillons étroitement avec nos clients pour comprendre leurs besoins spécifiques qu'il s'agisse de trouver le bon fournisseur, de naviguer les exigences douanières ou de distribuer des produits à travers l'Amérique du Nord.</p>
+      <p>Nous en sommes aux débuts de notre aventure, et nous en sommes fiers. Chaque relation que nous construisons est une relation que nous souhaitons maintenir à long terme, fondée sur la transparence, une communication claire et un engagement sincère.</p>
+      <a href="#contact" class="btn-primary" style="margin-top:0.5rem; display:inline-block;">Travaillons ensemble</a>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <span class="section-tag">Ce que nous faisons</span>
+    <h2 class="section-title">Nos services</h2>
+    <p class="section-sub">Nous offrons un ensemble ciblé de services conçus pour simplifier le commerce transfrontalier, adaptables à votre secteur et à la nature de vos produits.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🌐</div>
+        <h3>Import &amp; Export</h3>
+        <p>Nous facilitons le commerce transfrontalier entre le Canada, les États-Unis et les marchés internationaux, en coordonnant la logistique et les exigences réglementaires.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔍</div>
+        <h3>Approvisionnement</h3>
+        <p>Nous vous aidons à identifier et à évaluer des fournisseurs qui correspondent à vos normes de qualité et de fiabilité, vous évitant le temps et l'incertitude d'une recherche autonome.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📦</div>
+        <h3>Distribution</h3>
+        <p>Nous contribuons à optimiser votre chaîne d'approvisionnement pour rendre vos produits plus accessibles aux clients au Canada et aux États-Unis.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🏪</div>
+        <h3>Accès aux marchés</h3>
+        <p>Nous accompagnons les entreprises internationales qui souhaitent pénétrer le marché canadien ou américain avec des conseils locaux et des connexions de distribution.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📋</div>
+        <h3>Conformité commerciale</h3>
+        <p>Nous veillons à ce que vos transactions respectent les exigences douanières et réglementaires applicables, réduisant ainsi les risques de retards ou de complications.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">💼</div>
+        <h3>Conseil en affaires</h3>
+        <p>Pour les entreprises qui débutent dans le commerce international, nous offrons des conseils pratiques pour vous aider à comprendre vos options et planifier vos prochaines étapes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW WE WORK -->
+  <section class="how" id="approche">
+    <span class="section-tag" style="color:var(--gold-light)">Notre approche</span>
+    <h2 class="section-title">Comment nous travaillons</h2>
+    <p class="section-sub">Notre approche est simple, personnelle et construite autour de votre situation spécifique.</p>
+    <div class="how-grid">
+      <div class="how-item">
+        <div class="num">01</div>
+        <h4>Écouter d'abord</h4>
+        <p>Nous prenons le temps de comprendre votre entreprise, vos objectifs et les défis que vous rencontrez avant de proposer quelque solution que ce soit.</p>
+      </div>
+      <div class="how-item">
+        <div class="num">02</div>
+        <h4>Adapter le plan</h4>
+        <p>Chaque mandat est façonné selon vos besoins: pas de formules génériques, seulement des plans concrets qui correspondent à votre réalité.</p>
+      </div>
+      <div class="how-item">
+        <div class="num">03</div>
+        <h4>Rester transparent</h4>
+        <p>Nous vous tenons informé à chaque étape. Aucune surprise, aucune complexité cachée, seulement une communication claire tout au long du processus.</p>
+      </div>
+      <div class="how-item">
+        <div class="num">04</div>
+        <h4>Bâtir sur le long terme</h4>
+        <p>Nous ne cherchons pas des transactions ponctuelles. Notre objectif est d'être un partenaire fiable sur lequel vous pouvez compter au fil de la croissance de votre entreprise.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="values" id="valeurs">
+    <span class="section-tag">Ce en quoi nous croyons</span>
+    <h2 class="section-title">Nos valeurs</h2>
+    <p class="section-sub" style="margin:0 auto 3rem;">Ce sont les principes qui guident chacune de nos décisions et chacune des relations que nous construisons.</p>
+    <div class="values-grid">
+      <div class="value-item">
+        <span class="value-icon">🤝</span>
+        <h4>Intégrité</h4>
+        <p>Nous disons ce que nous pensons et faisons ce que nous disons. Les relations honnêtes ne sont pas négociables pour nous.</p>
+      </div>
+      <div class="value-item">
+        <span class="value-icon">🎯</span>
+        <h4>Clarté</h4>
+        <p>Nous démystifions la complexité et communiquons simplement, pour que vous sachiez toujours où en sont les choses.</p>
+      </div>
+      <div class="value-item">
+        <span class="value-icon">🌱</span>
+        <h4>Partenariat</h4>
+        <p>Votre succès est le nôtre. Nous sommes investis dans les résultats, pas seulement dans la transaction.</p>
+      </div>
+      <div class="value-item">
+        <span class="value-icon">🔎</span>
+        <h4>Rigueur</h4>
+        <p>Nous faisons nos devoirs: vérification des fournisseurs, contrôle de la conformité, suivi de chaque détail.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div>
+      <span class="section-tag">Contactez-nous</span>
+      <h2 class="section-title">Parlons-en</h2>
+      <p class="section-sub" style="margin-bottom:2rem;">Vous avez une question ou souhaitez explorer comment nous pouvons vous aider ? Envoyez-nous un message et nous vous répondrons rapidement.</p>
+      <div class="contact-detail">
+        <div class="icon">📍</div>
+        <p><strong>Emplacement</strong>Canada</p>
+      </div>
+      <div class="contact-detail">
+        <div class="icon">🌐</div>
+        <p><strong>Site web</strong>musaogroup.com</p>
+      </div>
+      <div class="contact-detail">
+        <div class="icon">✉️</div>
+        <p><strong>Courriel</strong>info@musaogroup.com</p>
+      </div>
+    </div>
+    <div>
+      <form class="contact-form" onsubmit="return false;">
+        <input type="text" placeholder="Votre nom" />
+        <input type="email" placeholder="Votre courriel" />
+        <textarea placeholder="Parlez-nous un peu de votre entreprise et de ce que vous recherchez..."></textarea>
+        <button type="submit">Envoyer le message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Groupe MUSAO<span>.</span> </div>
+    <p>© 2024 Groupe MUSAO. Tous droits réservés.</p>
+    <div class="footer-links">
+      <a href="#apropos">À propos</a>
+      <a href="#services">Services</a>
+      <a href="#approche">Notre approche</a>
+      <a href="#valeurs">Valeurs</a>
+      <a href="#contact">Contact</a>
+      <a href="index.html">English</a>
+    </div>
+  </footer>
+
+</body>
+</html>
