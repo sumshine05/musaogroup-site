@@ -113,19 +113,21 @@
     }
 
     .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 70% 60% at 80% 50%, rgba(200,151,58,0.08) 0%, transparent 70%),
-        repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(255,255,255,0.015) 40px, rgba(255,255,255,0.015) 41px);
-    }
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 60% at 80% 50%, rgba(200,151,58,0.08) 0%, transparent 70%),
+    repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(255,255,255,0.015) 40px, rgba(255,255,255,0.015) 41px);
+}
 
     .hero-content {
-      position: relative;
-      max-width: 680px;
-      animation: fadeUp 0.9s ease both;
-    }
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+  animation: fadeUp 0.9s ease both;
+}
 
     .hero-tag {
       display: inline-block;
