@@ -438,10 +438,11 @@
       </div>
     </div>
     <div>
-      <form class="contact-form" onsubmit="return false;">
-        <input type="text" placeholder="Votre nom" />
-        <input type="email" placeholder="Votre courriel" />
-        <textarea placeholder="Parlez-nous un peu de votre entreprise et de ce que vous recherchez..."></textarea>
+      <form class="contact-form" id="contact-form" action="https://formspree.io/f/xgonbzgr" method="POST">
+        <input type="text" name="name" placeholder="Votre nom" required />
+        <input type="email" name="email" placeholder="Votre courriel" required />
+        <textarea name="message" placeholder="Parlez-nous un peu de votre entreprise et de ce que vous recherchez..." required></textarea>
+        ­<input type="text" name="_gotcha" style="display:none" >
         <button type="submit">Envoyer le message</button>
       </form>
     </div>
